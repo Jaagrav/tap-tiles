@@ -32,10 +32,13 @@ class GenerateAndMoveTiles {
             
             tile.setAttribute("tile-clicked", "false");
             tile.addEventListener("click", () => {
-                if(tile.className.includes("pressable"))
+                if(tile.className.includes("pressable")){
                     tile.setAttribute("tile-clicked", "true");
-                else
-                    console.log("stop game due to false touch")
+                    this.register_tap(tile, 0);
+                }
+                else{
+                    this.register_tap(tile, 1);
+                }
             });
 
             tileRow.appendChild(tile);
@@ -56,10 +59,13 @@ class GenerateAndMoveTiles {
             
             tile.setAttribute("tile-clicked", "false");
             tile.addEventListener("click", () => {
-                if(tile.className.includes("pressable"))
+                if(tile.className.includes("pressable")){
                     tile.setAttribute("tile-clicked", "true");
-                else
-                    console.log("stop game due to false touch")
+                    this.register_tap(tile, 0);
+                }
+                else{
+                    this.register_tap(tile, 1);
+                }
             });
             
             tileRow.appendChild(tile);
@@ -147,6 +153,26 @@ class GenerateAndMoveTiles {
 
                 }
             })
+    }
+
+    register_tap(elem, type) {
+
+        switch (type) {
+            case 0: 
+                gsap.to(elem, {
+                    duration: .3,
+                    opacity: 0,
+                });
+                break;
+            case 1:
+                gsap.to(elem, {
+                    duration: .2,
+                    background: "rgba(255, 0, 0, 0.6)"
+                });
+                this.stop_game();
+                break;
+        }
+
     }
 
     stop_game() {

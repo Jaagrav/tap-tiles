@@ -42,7 +42,7 @@ html, body {
     transition: .3s;
 }
 .tile:active {
-    background: rgba(0, 0, 0, 0.306)
+    background: rgba(0, 0, 0, 0.306);
 }
 
 .tile.pressable {
