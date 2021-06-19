@@ -10,10 +10,14 @@ html, body {
 }
 
 .game-tiles {
-    overflow: hidden;
     height: 100%;
     width: 100%;
     background: linear-gradient(-30deg, #c892ff, #51d7ff);
+}
+
+.game-tiles-container {
+    height: 100%;
+    width: 100%;
 }
 
 .tiles-container1, .tiles-container2 {
@@ -26,7 +30,7 @@ html, body {
 }
 
 .tile-row {
-    height: calc(100vh - 75vh);
+    height: 200px;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);

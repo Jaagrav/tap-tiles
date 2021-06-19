@@ -3,6 +3,7 @@ class GenerateAndMoveTiles {
         this.tileSpeed = 0.2;
         this.prevRandomNum = 0;
         this.gameInterval = {};
+        this.gameTiles = document.querySelector(".game-tiles-container");
         this.tilesContainer1 = document.querySelector(".tiles-container1");
         this.tilesContainer2 = document.querySelector(".tiles-container2");
         this.tileRowHeight = {};
@@ -28,6 +29,15 @@ class GenerateAndMoveTiles {
         for(let i = 0 ; i < 4 ; i++) {
             const tile = document.createElement("div");
             tile.className = "tile" + ((randomNum === i) ? " pressable" : "");
+            
+            tile.setAttribute("tile-clicked", "false");
+            tile.addEventListener("click", () => {
+                if(tile.className.includes("pressable"))
+                    tile.setAttribute("tile-clicked", "true");
+                else
+                    console.log("stop game due to false touch")
+            });
+
             tileRow.appendChild(tile);
         }       
 
@@ -43,6 +53,15 @@ class GenerateAndMoveTiles {
         for(let i = 0 ; i < 4 ; i++) {
             const tile = document.createElement("div");
             tile.className = "tile" + ((randomNum === i) ? " pressable" : "");
+            
+            tile.setAttribute("tile-clicked", "false");
+            tile.addEventListener("click", () => {
+                if(tile.className.includes("pressable"))
+                    tile.setAttribute("tile-clicked", "true");
+                else
+                    console.log("stop game due to false touch")
+            });
+            
             tileRow.appendChild(tile);
         }       
         
@@ -62,17 +81,22 @@ class GenerateAndMoveTiles {
     }
 
     play_game() {
+        gsap.to(this.gameTiles, {
+            translateY: window.innerHeight
+        });
+        this.generate_next_tile_rows1();
+        this.generate_next_tile_rows2();
         this.tileRowHeight = {
             row1: this.tilesContainer1.clientHeight,
             row2: this.tilesContainer2.clientHeight,
         };
         this.tileRowPosition = {
-            row1: -this.tileRowHeight.row1,
-            row2: -this.tileRowHeight.row2 * 2
+            row1: -this.tileRowHeight.row1 - 400,
+            row2: -(this.tileRowHeight.row2 * 2) - 400
         };
 
-        this.tilesContainer1.style.transform = `translateY(${-this.tileRowHeight.row1}px)`;
-        this.tilesContainer2.style.transform = `translateY(${-this.tileRowHeight.row2 * 2}px)`;
+        this.tilesContainer1.style.top = `${this.tileRowPosition.row1}px`;
+        this.tilesContainer2.style.top = `${this.tileRowPosition.row2}px`;
         
         this.gameInterval = setInterval(() => {
             this.tileRowPosition.row1 += this.tileSpeed * 20;
@@ -93,12 +117,12 @@ class GenerateAndMoveTiles {
             gsap.to(this.tilesContainer1, {
                 duration: 0,
                 ease: 'none',
-                translateY: `${this.tileRowPosition.row1}px`
+                top: `${this.tileRowPosition.row1}px`
             });
             gsap.to(this.tilesContainer2, {
                 duration: 0,
                 ease: 'none',
-                translateY: `${this.tileRowPosition.row2}px`
+                top: `${this.tileRowPosition.row2}px`
             });
 
             this.checkBelowScreen();
@@ -106,10 +130,23 @@ class GenerateAndMoveTiles {
     }
 
     checkBelowScreen() {
-        document.querySelectorAll(".tile.pressable").forEach((elem, index) => {
-            console.log(window.innerHeight - elem.offsetTop)
-            
-        })
+        if(this.tileRowHeight && this.tileRowPosition)
+            document.querySelectorAll(".tile.pressable").forEach((elem, index) => {
+                if(
+                    (Math.abs(this.tileRowPosition.row1) === elem.offsetTop ||
+                    Math.abs(this.tileRowPosition.row2) === elem.offsetTop) &&
+                    elem.getAttribute("tile-clicked") === "false"
+                ) {
+                    if(this.tileRowPosition.row1 > this.tileRowPosition.row2 && elem.parentElement.parentElement.className === "tiles-container1") {
+                        this.stop_game();
+                    }
+                    
+                    if(this.tileRowPosition.row1 < this.tileRowPosition.row2 && elem.parentElement.parentElement.className === "tiles-container2") {
+                        this.stop_game();
+                    }
+
+                }
+            })
     }
 
     stop_game() {
