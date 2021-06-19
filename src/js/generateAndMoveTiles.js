@@ -9,6 +9,7 @@ class GenerateAndMoveTiles {
         this.tileRowHeight = {};
         this.tileRowPosition = {};
         this.tileRows = [];
+        this.score = 0;
     }
 
     getRandomNum() {
@@ -163,6 +164,7 @@ class GenerateAndMoveTiles {
                     duration: .3,
                     opacity: 0,
                 });
+                this.score++;
                 break;
             case 1:
                 gsap.to(elem, {
@@ -177,5 +179,6 @@ class GenerateAndMoveTiles {
 
     stop_game() {
         clearInterval(this.gameInterval)
+        alert("Total score: " + this.score)
     }
 }
