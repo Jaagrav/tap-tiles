@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
 * {
     box-sizing: border-box;
 }
@@ -52,4 +54,17 @@ html, body {
 .tile.pressable:active {
     background: rgb(79, 79, 79);
     border: 8px solid rgb(34, 34, 34);
+}
+
+.score {
+    position: absolute;
+    height: fit-content;
+    width: fit-content;
+    top: 18px;left: 0;right: 0;
+    margin: auto;
+    font-size: 48px;
+    text-shadow: 0 0 30px black;
+    color: white;
+    z-index: 9999;
+    font-family: "Open Sans",sans-serif;
 }

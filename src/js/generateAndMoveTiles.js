@@ -3,13 +3,14 @@ class GenerateAndMoveTiles {
         this.tileSpeed = 0.2;
         this.prevRandomNum = 0;
         this.gameInterval = {};
+        this.score = 0;
+        this.scoreElem = document.querySelector(".score");
         this.gameTiles = document.querySelector(".game-tiles-container");
         this.tilesContainer1 = document.querySelector(".tiles-container1");
         this.tilesContainer2 = document.querySelector(".tiles-container2");
         this.tileRowHeight = {};
         this.tileRowPosition = {};
         this.tileRows = [];
-        this.score = 0;
     }
 
     getRandomNum() {
@@ -106,6 +107,7 @@ class GenerateAndMoveTiles {
         this.tilesContainer2.style.top = `${this.tileRowPosition.row2}px`;
         
         this.gameInterval = setInterval(() => {
+            this.scoreElem.innerHTML = this.score;
             this.tileRowPosition.row1 += this.tileSpeed * 20;
             this.tileRowPosition.row2 += this.tileSpeed * 20;
 
@@ -179,6 +181,5 @@ class GenerateAndMoveTiles {
 
     stop_game() {
         clearInterval(this.gameInterval)
-        alert("Total score: " + this.score)
     }
 }
