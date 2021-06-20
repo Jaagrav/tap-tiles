@@ -14,7 +14,7 @@ class Music {
         });
         this.music.addEventListener("ended", () => {
             this.playMusic = Math.floor(Math.random() * this.tracks.length);
-            this.music = new Audio(this.musicPath + this.tracks[this.playMusic]);
+            this.music.src = this.musicPath + this.tracks[this.playMusic];
             this.play();
         })
     }

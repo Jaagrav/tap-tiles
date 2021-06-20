@@ -10,9 +10,18 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
+    background: linear-gradient(-30deg, rgb(98 88 255), rgb(134 255 238));
 }
 
 .text {
     text-shadow: 0 0 30px black;
     color: white;
+}
+
+.body {
+    margin: auto;
+    position: relative;
+    height: 100%;
+    width: 100%;
+    max-width: 24pc;
 }

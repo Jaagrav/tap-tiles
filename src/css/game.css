@@ -1,7 +1,6 @@
 .game-tiles, .game {
     height: 100%;
     width: 100%;
-    background: linear-gradient(-30deg, #c892ff, #51d7ff);
 }
 
 .game-tiles-container {
@@ -29,8 +28,10 @@
     height: 100%;
     width: 100%;
     transition: .3s;
+    border-radius: 4px;
+    cursor: pointer;
 }
-.tile:active {
+.tile:active, .tile:hover {
     background: rgba(0, 0, 0, 0.306);
 }
 
@@ -38,7 +39,7 @@
     background: #000;
 }
 
-.tile.pressable:active {
+.tile.pressable:active, .tile.pressable:hover {
     background: rgb(79, 79, 79);
     border: 8px solid rgb(34, 34, 34);
 }

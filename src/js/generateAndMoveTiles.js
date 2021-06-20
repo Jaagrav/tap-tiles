@@ -168,6 +168,19 @@ class GenerateAndMoveTiles {
         }
     }
 
+    animateScore() {
+        gsap.to(this.scoreElem, {
+            duration: .3,
+            scale: 1.2
+        })
+        gsap.to(this.scoreElem, {
+            delay: .3,
+            duration: .7,
+            ease: 'elastic',
+            scale: 1
+        })
+    }
+
     register_tap(elem, type) {
 
         switch (type) {
@@ -177,6 +190,7 @@ class GenerateAndMoveTiles {
                     opacity: 0,
                 });
                 this.score++;
+                this.animateScore();
                 break;
             case 1: 
                 gsap.to(this.tilesContainer1, {
