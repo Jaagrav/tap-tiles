@@ -123,14 +123,14 @@ class GenerateAndMoveTiles {
             this.tileRowPosition.row1 += 20 * this.tileSpeed;
             this.tileRowPosition.row2 += 20 * this.tileSpeed;
 
-            if(this.tileRowPosition.row1 > 0) {
+            if(this.tileRowPosition.row1 >= 0) {
                 this.tileRowPosition.row1 = -this.tileRowHeight.row1 + this.tileRowPosition.row2;
                 this.tilesContainer1.innerHTML = "";
                 this.generate_next_tile_rows1();
                 this.tileSpeed += 0.05;
             }
             
-            if(this.tileRowPosition.row2 > 0){
+            if(this.tileRowPosition.row2 >= 0){
                 this.tileRowPosition.row2 = -this.tileRowHeight.row2 + this.tileRowPosition.row1;
                 this.tilesContainer2.innerHTML = "";
                 this.generate_next_tile_rows2();
@@ -157,11 +157,12 @@ class GenerateAndMoveTiles {
     checkBelowScreen() {
         if(this.tileRowHeight && this.tileRowPosition){
             let c1Showing = this.tileRowPosition.row1 > this.tileRowPosition.row2;
+            console.log(c1Showing, this.tileRowPosition)
             document.querySelectorAll(`.tiles-container${c1Showing ? 1 : 2} .tile.pressable`).forEach((elem, index) => {
-                if(Math.abs(this.tileRowPosition.row1) <= elem.offsetTop && elem.getAttribute("tile-clicked") === "false") {
+                if(Math.abs(this.tileRowPosition.row1) - 2 <= elem.offsetTop && elem.getAttribute("tile-clicked") === "false") {
                     this.register_tap(elem, 1);
                 }
-                if(Math.abs(this.tileRowPosition.row2) <= elem.offsetTop && elem.getAttribute("tile-clicked") === "false") {
+                if(Math.abs(this.tileRowPosition.row2) - 2 <= elem.offsetTop && elem.getAttribute("tile-clicked") === "false") {
                     this.register_tap(elem, 1);
                 }
             })
