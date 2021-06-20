@@ -6,6 +6,9 @@ class GenerateAndMoveTiles {
         this.gameInterval = {};
         this.score = 0;
         this.scoreElem = document.querySelector(".score");
+        this.highScoreElem = document.querySelector(".game_high_score_value");
+        if(!localStorage?.getItem('highScore')) localStorage.setItem('highScore', 0)
+        this.highScoreElem.innerHTML = localStorage.highScore;
         this.gameTiles = document.querySelector(".game-tiles-container");
         this.tilesContainer1 = document.querySelector(".tiles-container1");
         this.tilesContainer2 = document.querySelector(".tiles-container2");
@@ -120,6 +123,8 @@ class GenerateAndMoveTiles {
         
         this.gameInterval = setInterval(() => {
             this.scoreElem.innerHTML = this.score;
+            localStorage.setItem('highScore', localStorage.getItem('highScore') < this.score ? this.score : localStorage.getItem('highScore'));
+            this.highScoreElem.innerHTML = localStorage.getItem('highScore');
             this.tileRowPosition.row1 += 20 * this.tileSpeed;
             this.tileRowPosition.row2 += 20 * this.tileSpeed;
 
@@ -141,11 +146,13 @@ class GenerateAndMoveTiles {
                 duration: 0,
                 ease: 'none',
                 top: `${this.tileRowPosition.row1}px`,
+                opacity: 1
             });
             gsap.to(this.tilesContainer2, {
                 duration: 0,
                 ease: 'none',
                 top: `${this.tileRowPosition.row2}px`,
+                opacity: 1
             });
 
             this.checkBelowScreen();
@@ -193,12 +200,30 @@ class GenerateAndMoveTiles {
         gsap.to(this.tilesContainer1, {
             ease: 'none',
             top: `${this.tileRowPosition.row1 - this.tileHeight}px`,
-            opacity: 1
         });
         gsap.to(this.tilesContainer2, {
             ease: 'none',
             top: `${this.tileRowPosition.row2 - this.tileHeight}px`,
-            opacity: 1
         });
+        setTimeout(() => {
+            gsap.to(this.tilesContainer1, {
+                ease: 'none',
+                top: `${-this.tileRowHeight.row2 * 2}px`,
+                opacity: 0
+            });
+            gsap.to(this.tilesContainer2, {
+                ease: 'none',
+                top: `${-this.tileRowHeight.row2 * 2}px`,
+                opacity: 0
+            });
+            gsap.to(this.scoreElem, {
+                top: -100
+            });
+            gsap.to(".landing", {
+                translateY: 0,
+                opacity: 1,
+                pointEvents: "auto",
+            });
+        }, 2000);
     }
 }
