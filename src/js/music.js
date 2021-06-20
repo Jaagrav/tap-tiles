@@ -21,7 +21,7 @@ class Music {
     pause() {
         gsap.to(this.music, {
             duration: 2,
-            volume: 0.005
+            volume: 0.3
         });
     }
 }
