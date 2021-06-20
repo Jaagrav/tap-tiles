@@ -12,6 +12,12 @@
     margin-bottom: 44px;
 }
 
+.head {
+    display: grid;
+    grid-template-rows: repeat(2, auto );
+    text-align: center;
+}
+
 .game_name {
     text-align: center;
     font-size: 3rem;
