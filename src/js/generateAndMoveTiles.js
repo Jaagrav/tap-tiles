@@ -8,7 +8,7 @@ class GenerateAndMoveTiles {
         this.scoreElem = document.querySelector(".score");
         this.highScoreElem = document.querySelector(".game_high_score_value");
         if(!localStorage?.getItem('highScore')) localStorage.setItem('highScore', 0)
-        this.highScoreElem.innerHTML = localStorage.highScore;
+        this.highScoreElem.innerHTML = localStorage.getItem('highScore');
         this.gameTiles = document.querySelector(".game-tiles-container");
         this.tilesContainer1 = document.querySelector(".tiles-container1");
         this.tilesContainer2 = document.querySelector(".tiles-container2");

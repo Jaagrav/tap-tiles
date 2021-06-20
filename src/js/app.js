@@ -1,3 +1,4 @@
+let generateAndMoveTiles = new GenerateAndMoveTiles();
 const music = new Music();
 
 document.querySelector(".game_playbtn").addEventListener('click', function(e) {
@@ -8,7 +9,7 @@ document.querySelector(".game_playbtn").addEventListener('click', function(e) {
     })
     setTimeout(() => {
         music.play();
-        const generateAndMoveTiles = new GenerateAndMoveTiles();
+        generateAndMoveTiles = new GenerateAndMoveTiles();
         generateAndMoveTiles.play_game();
     }, 1000);
 })
