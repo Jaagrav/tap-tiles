@@ -15,11 +15,6 @@ class GenerateAndMoveTiles {
         this.tileRowHeight = {};
         this.tileRowPosition = {};
         this.tileRows = [];
-
-        gsap.to(this.scoreElem, {
-            duration: 0,
-            top: -100
-        });
     }
 
     getRandomNum() {
@@ -48,7 +43,7 @@ class GenerateAndMoveTiles {
                     this.register_tap(tile, 0);
                 }
                 else{
-                    this.register_tap(tile, 1);
+                    this.register_tap(tile, 2);
                 }
             });
 
@@ -75,7 +70,7 @@ class GenerateAndMoveTiles {
                     this.register_tap(tile, 0);
                 }
                 else{
-                    this.register_tap(tile, 1);
+                    this.register_tap(tile, 2);
                 }
             });
             
@@ -132,14 +127,14 @@ class GenerateAndMoveTiles {
                 this.tileRowPosition.row1 = -this.tileRowHeight.row1 + this.tileRowPosition.row2;
                 this.tilesContainer1.innerHTML = "";
                 this.generate_next_tile_rows1();
-                this.tileSpeed += 0.01;
+                this.tileSpeed += 0.02;
             }
             
             if(this.tileRowPosition.row2 > 0){
                 this.tileRowPosition.row2 = -this.tileRowHeight.row2 + this.tileRowPosition.row1;
                 this.tilesContainer2.innerHTML = "";
                 this.generate_next_tile_rows2();
-                this.tileSpeed += 0.01;
+                this.tileSpeed += 0.02;
             }
 
             gsap.to(this.tilesContainer1, {
@@ -183,7 +178,16 @@ class GenerateAndMoveTiles {
                 });
                 this.score++;
                 break;
-            case 1:
+            case 1: 
+                gsap.to(this.tilesContainer1, {
+                    ease: 'none',
+                    top: `${this.tileRowPosition.row1 - this.tileHeight}px`,
+                });
+                gsap.to(this.tilesContainer2, {
+                    ease: 'none',
+                    top: `${this.tileRowPosition.row2 - this.tileHeight}px`,
+                });
+            case 2:
                 gsap.to(elem, {
                     duration: .2,
                     background: "rgba(255, 0, 0, 0.6)",
@@ -197,14 +201,6 @@ class GenerateAndMoveTiles {
 
     stop_game() {
         clearInterval(this.gameInterval);
-        gsap.to(this.tilesContainer1, {
-            ease: 'none',
-            top: `${this.tileRowPosition.row1 - this.tileHeight}px`,
-        });
-        gsap.to(this.tilesContainer2, {
-            ease: 'none',
-            top: `${this.tileRowPosition.row2 - this.tileHeight}px`,
-        });
         setTimeout(() => {
             gsap.to(this.tilesContainer1, {
                 ease: 'none',
@@ -224,6 +220,7 @@ class GenerateAndMoveTiles {
                 opacity: 1,
                 pointEvents: "auto",
             });
+            music.pause();
         }, 2000);
     }
 }
