@@ -1,17 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
-
-* {
-    box-sizing: border-box;
-}
-
-html, body {
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-}
-
-.game-tiles {
+.game-tiles, .game {
     height: 100%;
     width: 100%;
     background: linear-gradient(-30deg, #c892ff, #51d7ff);
@@ -32,7 +19,7 @@ html, body {
 }
 
 .tile-row {
-    height: 200px;
+    height: calc(100vh - 75vh);
     width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -63,8 +50,5 @@ html, body {
     top: 18px;left: 0;right: 0;
     margin: auto;
     font-size: 48px;
-    text-shadow: 0 0 30px black;
-    color: white;
     z-index: 9999;
-    font-family: "Open Sans",sans-serif;
 }

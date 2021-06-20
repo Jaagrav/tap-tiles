@@ -1,0 +1,10 @@
+.landing {
+    position: absolute;
+    margin: auto;
+    top: 0;right: 0;left: 0;bottom: 0;
+}
+
+.game_name {
+    text-align: center;
+    font-size: 3rem;
+}

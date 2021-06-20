@@ -1,2 +1,2 @@
 const generateAndMoveTiles = new GenerateAndMoveTiles();
-generateAndMoveTiles.play_game();
+// generateAndMoveTiles.play_game();
