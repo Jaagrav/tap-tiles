@@ -127,14 +127,14 @@ class GenerateAndMoveTiles {
                 this.tileRowPosition.row1 = -this.tileRowHeight.row1 + this.tileRowPosition.row2;
                 this.tilesContainer1.innerHTML = "";
                 this.generate_next_tile_rows1();
-                this.tileSpeed += 0.02;
+                this.tileSpeed += 0.05;
             }
             
             if(this.tileRowPosition.row2 > 0){
                 this.tileRowPosition.row2 = -this.tileRowHeight.row2 + this.tileRowPosition.row1;
                 this.tilesContainer2.innerHTML = "";
                 this.generate_next_tile_rows2();
-                this.tileSpeed += 0.02;
+                this.tileSpeed += 0.05;
             }
 
             gsap.to(this.tilesContainer1, {
